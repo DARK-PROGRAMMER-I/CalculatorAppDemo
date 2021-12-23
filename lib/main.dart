@@ -29,52 +29,80 @@ class _HomePageState extends State<HomePage> {
     "0", "." , "Ans" , "=",
 
   ];
+  String initial_number = "0";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple[100],
-      body: Column(
-        children: [
-          Expanded(child: Container()),
-          Expanded(
-              flex: 2,
 
-              child: Container(
+      body: Container(
+        // padding: EdgeInsets.only(top: 20),
+        child: Column(
 
-                child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: false,
+          children: [
 
-                    itemCount: buttons.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,mainAxisSpacing: 0 , crossAxisSpacing: 3.0,childAspectRatio: 1.2,
-                    ), // We have used this to split the buttons
-                    itemBuilder: (BuildContext context, int index){
-                    if(buttons[index] == "C" ){
-                      return MyButtons(
-                        color: Colors.green,
-                        textColor: Colors.white70,
-                        buttonText: buttons[index],
-                      );
-                    }else if(buttons[index] == "Del")
-                      {
+
+
+            // Expanded(child: child),
+            Expanded(
+
+
+                child: Container(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Text(initial_number),
+
+                ),
+            ),
+            Expanded(
+                flex: 2,
+
+                child: Container(
+
+                  child: GridView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: false,
+
+                      itemCount: buttons.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,mainAxisSpacing: 0 , crossAxisSpacing: 3.0,childAspectRatio: 1.2,
+                      ), // We have used this to split the buttons
+                      itemBuilder: (BuildContext context, int index){
+                        // clear button
+                      if(buttons[index] == "C" ){
                         return MyButtons(
-                          color: Colors.redAccent,
+                          color: Colors.green,
                           textColor: Colors.white70,
                           buttonText: buttons[index],
                         );
+                        // Delete button
+                      }else if(buttons[index] == "Del")
+                        {
+                          return MyButtons(
+                            color: Colors.redAccent,
+                            textColor: Colors.white70,
+                            buttonText: buttons[index],
+                          );
+                        }
+                      // other buttons
+                      else{
+                        return MyButtons(
+                          isTapped:(){
+                            setState(() {
+                              Text(initial_number += buttons[index]);
+                            });
+                          },
+                          color: isOperator(buttons[index]) ?  Colors.deepPurple : Colors.white70,
+                          textColor: isOperator(buttons[index]) ?  Colors.white70: Colors.deepPurple,
+                          buttonText: buttons[index],
+                        );
                       }
-                    else{
-                      return MyButtons(
-                        color: isOperator(buttons[index]) ?  Colors.deepPurple : Colors.white70,
-                        textColor: isOperator(buttons[index]) ?  Colors.white70: Colors.deepPurple,
-                        buttonText: buttons[index],
-                      );
-                    }
-                    }// Item Builder
-              ),
-          ),)
-        ],
+                      }// Item Builder
+                ),
+            ),
+            ),
+
+          ],
+        ),
       ),
     );
   }

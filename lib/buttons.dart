@@ -5,26 +5,30 @@ class MyButtons extends StatelessWidget {
   final color;
   final textColor;
   final String buttonText;
-
-  MyButtons({this.color, this.textColor, this.buttonText: "abc"});
+  final isTapped;
+  MyButtons({this.color, this.textColor, this.buttonText: "abc" , this.isTapped});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return GestureDetector(
+      onTap: isTapped,
 
-      padding: const EdgeInsets.all(8),
+      child: Padding(
 
-      child: ClipRRect( // Basically we are using this widget as we want our container to be rounded
+        padding: const EdgeInsets.all(8),
 
-        borderRadius: BorderRadius.circular(20),
+        child: ClipRRect( // Basically we are using this widget as we want our container to be rounded
 
-        child: Container(
+          borderRadius: BorderRadius.circular(20),
 
-          color: color,
           child: Container(
 
-            child: Center(
-              child: Text(buttonText, style: TextStyle( color: textColor),),
+            color: color,
+            child: Container(
+
+              child: Center(
+                child: Text(buttonText, style: TextStyle( color: textColor, fontSize: 20),),
+              ),
             ),
           ),
         ),
