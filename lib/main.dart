@@ -44,24 +44,47 @@ class _HomePageState extends State<HomePage> {
 
                 child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
+                    shrinkWrap: false,
 
-                  itemCount: buttons.length,
+                    itemCount: buttons.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,mainAxisSpacing: 0 , crossAxisSpacing: 3.0,childAspectRatio: 1.2,
                     ), // We have used this to split the buttons
                     itemBuilder: (BuildContext context, int index){
-                    return MyButtons(
-                    color: Colors.deepPurple,
-                    textColor: Colors.white70,
-                    buttonText: buttons[index],
-                    );
-                }// Item Builder
+                    if(buttons[index] == "C" ){
+                      return MyButtons(
+                        color: Colors.green,
+                        textColor: Colors.white70,
+                        buttonText: buttons[index],
+                      );
+                    }else if(buttons[index] == "Del")
+                      {
+                        return MyButtons(
+                          color: Colors.redAccent,
+                          textColor: Colors.white70,
+                          buttonText: buttons[index],
+                        );
+                      }
+                    else{
+                      return MyButtons(
+                        color: isOperator(buttons[index]) ?  Colors.deepPurple : Colors.white70,
+                        textColor: isOperator(buttons[index]) ?  Colors.white70: Colors.deepPurple,
+                        buttonText: buttons[index],
+                      );
+                    }
+                    }// Item Builder
               ),
           ),)
         ],
       ),
     );
   }
+  bool isOperator(String x){
+    if(x == "/" || x == "x" || x == "+" ||x == "-" || x == "=" || x== "%" ){
+      return true;
+    }
+    return false;
+  }
+
 }
 // GridView.builder(
 // physics: NeverScrollableScrollPhysics(),
