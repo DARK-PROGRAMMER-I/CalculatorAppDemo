@@ -48,11 +48,20 @@ class _HomePageState extends State<HomePage> {
             Expanded(
 
 
-                child: Container(
-                  alignment: Alignment.bottomRight,
-                  padding: EdgeInsets.only(top: 120, left: 10, right: 30 ),
-                  child: Text(initial_number, style: TextStyle(fontSize: 22),),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.bottomRight,
+                      padding: EdgeInsets.only(top: 50, left: 10, right: 30 ),
+                      child: Text(initial_number, style: TextStyle(fontSize: 22),),
 
+                    ),
+                    Container(
+                      alignment: Alignment.bottomRight,
+                      padding: EdgeInsets.only(top: 50, right: 30 ),
+                      child: Text(initial_number, style: TextStyle(fontSize: 22),),
+                    )
+                  ],
                 ),
             ),
             Expanded(
