@@ -1,6 +1,6 @@
 import 'package:calculator/buttons.dart';
 import "package:flutter/material.dart";
-
+import "dart:convert";
 
 void main() => runApp(Calculator());
 
@@ -49,8 +49,9 @@ class _HomePageState extends State<HomePage> {
 
 
                 child: Container(
-                  padding: EdgeInsets.only(top: 20),
-                  child: Text(initial_number),
+                  alignment: Alignment.bottomRight,
+                  padding: EdgeInsets.only(top: 120, left: 10, right: 30 ),
+                  child: Text(initial_number, style: TextStyle(fontSize: 22),),
 
                 ),
             ),
@@ -70,6 +71,11 @@ class _HomePageState extends State<HomePage> {
                         // clear button
                       if(buttons[index] == "C" ){
                         return MyButtons(
+                          isTapped: (){
+                            setState(() {
+                              initial_number = '0';
+                            });
+                          },
                           color: Colors.green,
                           textColor: Colors.white70,
                           buttonText: buttons[index],
@@ -78,6 +84,11 @@ class _HomePageState extends State<HomePage> {
                       }else if(buttons[index] == "Del")
                         {
                           return MyButtons(
+                            isTapped: () {
+                              setState(() {
+                                initial_number = initial_number.substring(0, initial_number.length -1);
+                              });
+                            },
                             color: Colors.redAccent,
                             textColor: Colors.white70,
                             buttonText: buttons[index],
@@ -88,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                         return MyButtons(
                           isTapped:(){
                             setState(() {
-                              Text(initial_number += buttons[index]);
+                              initial_number += buttons[index];
                             });
                           },
                           color: isOperator(buttons[index]) ?  Colors.deepPurple : Colors.white70,
